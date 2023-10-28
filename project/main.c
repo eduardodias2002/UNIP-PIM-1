@@ -227,7 +227,7 @@ int main(){
 int TocarAudio(NomeAudio)
 {
     //Toca Áudio
-    PlaySound(NomeAudio, NULL, SND_FILENAME | SND_SYNC);
+    PlaySound(NomeAudio, NULL, SND_FILENAME | SND_ASYNC);
     //Retorna 0
     return 0;
 }
