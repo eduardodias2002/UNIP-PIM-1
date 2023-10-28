@@ -5,10 +5,10 @@
 #include <string.h>
 #include <time.h>
 
-
 bool ModoPCD = false;
 char NomeAudio[] = "";
 // Definindo uma estrutura para representar os ingressos
+
 typedef struct {
     int id;
     char tipo[50];
@@ -20,14 +20,11 @@ typedef struct {
     char cpf[12];
     int numeroBilhete;
 } Cliente;
-
 // definindo estrutura para pesquisa
 typedef struct {
 	int gostou;
 	char proxima[3];
 }Pesquisa;
-
-
 // Função para exibir informações sobre os ingressos disponíveis
 void mostrarIngressos(Ingresso ingressos[], int tamanho) {
     printf("Ingressos disponiveis:\n");
@@ -38,7 +35,6 @@ void mostrarIngressos(Ingresso ingressos[], int tamanho) {
         printf("\n");
     }
 }
-
 // Função para vender um ingresso
 void venderIngresso(Ingresso ingressos[], int tamanho) {
     int id;
@@ -91,9 +87,7 @@ void venderIngresso(Ingresso ingressos[], int tamanho) {
 
     }
 }
-
 // função para mostar a pesquisa
-
 void realizarPesquisa(Pesquisa *resposta) {
     FILE *arquivo;
 
@@ -228,10 +222,10 @@ int main(){
 }
 
 int TocarAudio(NomeAudio){
-    if (ModoPCD == true){ // Checa se a o modo PCD está ligado, caso sim, o áudio toca
+    if (ModoPCD == true){ // Checa se a o modo PCD está ligado, caso sim, o áudio reproduzido
         PlaySound(NomeAudio, NULL, SND_FILENAME | SND_ASYNC);
         return 0;
     }
-    else // Caso contrário, nenhum áudio é tocado
+    else // Caso contrário, nenhum áudio é reproduzido
     return 0;
 }
