@@ -42,6 +42,7 @@ void mostrarIngressos(Ingresso ingressos[], int tamanho) {
 // Função para vender um ingresso
 void venderIngresso(Ingresso ingressos[], int tamanho) {
     int id;
+    TocarAudio("audios\\salas.wav");
     printf("Digite o ID do ingresso que deseja comprar: ");
     scanf("%d", &id);
 
@@ -60,10 +61,12 @@ void venderIngresso(Ingresso ingressos[], int tamanho) {
         }
 
         // Solicita o nome do cliente
+        TocarAudio("audios\\cliente.wav");
         printf("Digite o nome do cliente: ");
         scanf(" %[^\n]s", cliente.nome);
 
         // Solicita o CPF do cliente
+        TocarAudio("audios\\CPF.wav");
         printf("Digite o CPF do cliente: ");
         scanf("%s", cliente.cpf);
 
@@ -77,14 +80,15 @@ void venderIngresso(Ingresso ingressos[], int tamanho) {
 
         // Fecha o arquivo
         fclose(arquivo);
-
         printf("Bilhete registrado com sucesso!\n");
         printf("Seu numero de bilhete e: %d\n", cliente.numeroBilhete);
         printf("Ingresso comprado com sucesso:\n");
         printf("Tipo: %s\n", ingressos[id - 1].tipo);
         printf("Preco: R$%.2lf\n", ingressos[id - 1].preco);
     } else {
+        TocarAudio("audios\\IDInvalido.wav");
         printf("ID de ingresso invalido.\n");
+
     }
 }
 
@@ -100,24 +104,25 @@ void realizarPesquisa(Pesquisa *resposta) {
         return;
     }
     do {
+        TocarAudio("audios\\Gostou.wav");
         printf("De 1 a 10, quanto gostou da exposicao?\n ");
         scanf("%d", &(resposta->gostou));
 
         if (resposta->gostou < 1 || resposta->gostou > 10) {
+            TocarAudio("audios\\ForaValor.wav");
             printf("Valor fora do intervalo permitido (1 a 10). Tente novamente.\n");
         }
     } while (resposta->gostou < 1 || resposta->gostou > 10);
-
+    TocarAudio("audios\\ProxExp.wav");
     printf("A proxima exposicao eh daqui a 5 dias, podera comparecer? (Sim ou Nao):\n ");
     scanf("%s", resposta->proxima);
-    TocarAudio();
 
     // Escreve os dados da pesquisa no arquivo
     fprintf(arquivo, "%d,%s\n", resposta->gostou, resposta->proxima);
 
     // Fecha o arquivo
     fclose(arquivo);
-
+    TocarAudio("audios\\PesqSucesso.wav");
     printf("Pesquisa registrada com sucesso.\n");
 }
 
@@ -146,7 +151,7 @@ int main(){
         printf("\t\t\t  %c%c%c%c\n \n", 25,25,25,25);
 
     do {
-
+        TocarAudio("audios\\Aperte.wav");
     	printf(" %c 1. Mostrar Ingressos Disponiveis\n", 175);
         printf(" %c 2. Comprar Ingresso\n", 175);
         printf(" %c 3. Iniciar excursao! \n", 175);
@@ -165,6 +170,7 @@ int main(){
                 break;
             case 3:
             	do {
+                TocarAudio("audios\\Salas.wav");
             	printf(" %c Escolha a sala que deseja assistir! \n\n", 175);
             	printf(" %c Excurcoes disponiveis:\n\n", 175);
             	printf(" %c Sala 1: 100 Anos da semana da arte moderna. \n", 175);
@@ -176,9 +182,11 @@ int main(){
             	system("cls");
             	switch (sala){
             		case 1:
+            		    TocarAudio("audios\\sala1.wav");
             			printf("\nApresentacao sobre 100 Anos da semana da arte moderna. \n\n ");
             		break;
 					case 2:
+					    TocarAudio("audios\\sala2.wav");
 						printf("\nApresentacao sobre 150 anos de Santos Dumont. \n\n");
 					break;
 					case 3:
@@ -188,10 +196,11 @@ int main(){
 						printf("\nApresentacao sobre Exploracao espacial futuristica. \n\n");
 					break;
 					case 5:
-						printf("Voltar ao menu prncipal!\n");
+						printf("Voltar ao menu principal!\n");
 						break;
 					default:
                 printf("Opcao invalida. Tente novamente.\n");
+                TocarAudio("audios\\invalida.wav");
 					}
 				} while (sala !=5);
 				break;
@@ -201,22 +210,16 @@ int main(){
                 break;
             case 5:
             	printf("Obrigado por usar o sistema de bilheteria.\n");
+            	TocarAudio("audios\\obrigado.wav");
                 break;
             case 6:
                 ModoPCD = !ModoPCD;
             	printf("Modo PCD esta: %s\n", ModoPCD ? "Ativado" : "Desativado");
-            	if (ModoPCD == true){
-                    TocarAudio("audios\\desativado.wav");
-                }
-            	else
-                    TocarAudio("audios\\ativado.wav");
+                TocarAudio("audios\\ativado.wav");
                 main();
             default:
                 printf("Opcao invalida. Tente novamente.\n");
-                if (ModoPCD == true){
-                    TocarAudio("audios\\invalida.wav");
-                }
-                else
+                TocarAudio("audios\\invalida.wav");
                 break;
         }
     }
@@ -224,10 +227,11 @@ int main(){
     return 0;
 }
 
-int TocarAudio(NomeAudio)
-{
-    //Toca Áudio
-    PlaySound(NomeAudio, NULL, SND_FILENAME | SND_ASYNC);
-    //Retorna 0
+int TocarAudio(NomeAudio){
+    if (ModoPCD == true){ // Checa se a o modo PCD está ligado, caso sim, o áudio toca
+        PlaySound(NomeAudio, NULL, SND_FILENAME | SND_ASYNC);
+        return 0;
+    }
+    else // Caso contrário, nenhum áudio é tocado
     return 0;
 }
