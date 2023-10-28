@@ -7,7 +7,7 @@
 
 
 bool ModoPCD = false;
-char NomeAudio[] = "dprk";
+char NomeAudio[] = "";
 // Definindo uma estrutura para representar os ingressos
 typedef struct {
     int id;
@@ -121,7 +121,6 @@ void realizarPesquisa(Pesquisa *resposta) {
     printf("Pesquisa registrada com sucesso.\n");
 }
 
-
 int main(){
     // Defina seus ingressos com tipos e preços
     Ingresso ingressos[] = {
@@ -151,7 +150,7 @@ int main(){
     	printf(" %c 1. Mostrar Ingressos Disponiveis\n", 175);
         printf(" %c 2. Comprar Ingresso\n", 175);
         printf(" %c 3. Iniciar excursao! \n", 175);
-        printf(" %c 4. Pesquisa de satistacao\n", 175);
+        printf(" %c 4. Pesquisa de satisfacao\n", 175);
         printf(" %c 5. Sair\n", 175);
         printf(" %c 6. Ligar/Desligar modo PCD\n", 175);
         printf("Escolha uma opcao: ");
