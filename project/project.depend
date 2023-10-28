@@ -1,0 +1,9 @@
+# depslib dependency file v1.0
+1698512854 source:c:\users\alyph\documents\projects\unip-pim-1\project\main.c
+	<stdio.h>
+	<stdlib.h>
+	<stdbool.h>
+	<windows.h>
+	<string.h>
+	<time.h>
+

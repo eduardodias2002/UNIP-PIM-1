@@ -1,7 +1,0 @@
-# depslib dependency file v1.0
-1698504527 source:c:\users\alyph\documents\bilheteria\bilheteria\main.c
-	<stdio.h>
-	<stdlib.h>
-	<string.h>
-	<time.h>
-
